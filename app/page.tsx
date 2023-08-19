@@ -9,7 +9,7 @@ export default function Home() {
           This app is the ultimate tool for monitoring your mood over your lifetime. Simply ensure your honesty for optimal results.
         </p>
         <div>
-          <Link href="journal">
+          <Link href="/journal">
             <button className='bg-blue-600 px-4 py-2 rounded-lg text-xl'>
               get started
             </button>
