@@ -6,48 +6,69 @@ generator client {
 }
 
 datasource db {
-  provider     = "mongodb"
-  url          = env("DATABASE_URL")
-  relationMode = "prisma"
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
 }
 
 model User {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id        String         @id @default(auto()) @map("_id") @db.ObjectId
+  email     String         @unique
+  clerkId   String         @unique
+  name      String?
+  createdAt DateTime       @default(now())
+  updatedAt DateTime       @updatedAt
+  account   Account?
+  entries   JournalEntry[]
+  analysis  EntryAnalysis[]
+}
 
-  clerkId String         @unique
-  email   String         @unique
-  entries JournalEntry[]
+model Account{
+  id               String @id @default(auto()) @map("_id") @db.ObjectId
+  userId           String
+  user             User   @relation(fields: [userId], references: [id])
+  // stripeCustomerId String @unique
+
+  @@unique([userId])
+}
+
+enum JOURNAL_ENTRY_STATUS {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
 }
 
 model JournalEntry {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  userId String @db.ObjectId
-  user   User   @relation(fields: [userId], references: [id])
-
-  content String 
-
-  analysis Analysis?
-
-  @@index([userId])
+  content String            
+  status  JOURNAL_ENTRY_STATUS @default(DRAFT)
+  analysis EntryAnalysis?
+  
+  @@unique([userId, id])
 }
 
-model Analysis {
+model EntryAnalysis {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  entryId String @db.ObjectId
-  entry   JournalEntry @relation(fields: [entryId], references: [id])
+  entryId String
+  entry JournalEntry @relation(fields: [entryId], references: [id], onDelete: Cascade)
 
-  mood     String
-  summary  String  
-  color    String
+  userId String
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  mood String 
+  subject String 
   negative Boolean
+  summary String 
+  color String  @default("#0101fe")
+  sentimentScore Float
 
   @@unique([entryId])
+  @@index([userId])
 }
