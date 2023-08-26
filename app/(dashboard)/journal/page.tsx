@@ -3,6 +3,7 @@ import { prisma } from '@/app/utils/db'
 import NewEntryCard from '@/components/NewEntryCard'
 import EntryCard from '@/components/EntryCard'
 import Link from 'next/link'
+import { analyze } from '@/app/utils/ai'
 
 const getEntries = async () => {
   const user = await getUserByClerkID()
@@ -14,6 +15,8 @@ const getEntries = async () => {
       createdAt: 'desc',
     },
   })
+
+  analyze('create me a vue component that renders a counting number')
 
   return entries
 }
