@@ -1,3 +1,4 @@
+import { analyze } from '@/app/utils/ai'
 import { getUserByClerkID } from '@/app/utils/auth'
 import { prisma } from '@/app/utils/db'
 import { revalidatePath } from 'next/cache'
@@ -10,6 +11,14 @@ export const POST = async () => {
       userId: user.id,
       content: 'Write about your day',
     },
+  })
+
+  const analysis = await analyze(entry.content)
+  await prisma.entryAnalysis.create({
+    data: {
+      entryId: entry.id,
+      ...analysis
+    }
   })
 
   revalidatePath('/journal')

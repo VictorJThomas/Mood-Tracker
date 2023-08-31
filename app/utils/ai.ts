@@ -1,6 +1,9 @@
 import { PromptTemplate } from 'langchain/prompts'
 import { GooglePaLM } from 'langchain/llms/googlepalm'
-import { StructuredOutputParser } from 'langchain/output_parsers'
+import {
+  StructuredOutputParser,
+  OutputFixingParser,
+} from 'langchain/output_parsers'
 import { z } from 'zod'
 
 const parser = StructuredOutputParser.fromZodSchema(
@@ -24,11 +27,12 @@ const parser = StructuredOutputParser.fromZodSchema(
 )
 
 const getPrompt = async (content) => {
-  const format_instructions = parser.getFormatInstructions()
+  const formatInstructions = parser.getFormatInstructions()
   const prompt = new PromptTemplate({
-    template: 'Analyze the following journal entry. Follow the instructions and format your response to match the format instructions, no matter what! \n{format_instructions}\n{entry}',
+    template:
+      'Analyze the following journal entry. Follow the instructions and format your response to match the format instructions, no matter what! \n{format_instructions}\n{entry}',
     inputVariables: ['entry'],
-    partialVariables: {format_instructions}
+    partialVariables: { format_instructions: formatInstructions },
   })
 
   const input = await prompt.format({
@@ -41,9 +45,16 @@ const getPrompt = async (content) => {
 export const analyze = async (content) => {
   const input = await getPrompt(content)
   const model = new GooglePaLM({
-    temperature: 0,
-    modelName: 'models/text-bison-001',
+    temperature: 1,
   })
+
   const result = await model.call(input)
-  console.log(result)
+  // console.log(result)
+  try {
+    return await parser.parse(result)
+  } catch (e) {
+    console.log(e)
+  }
+
+  // console.log(await parser.parse(result));
 }
