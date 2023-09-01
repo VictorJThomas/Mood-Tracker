@@ -1,9 +1,6 @@
 import { PromptTemplate } from 'langchain/prompts'
 import { GooglePaLM } from 'langchain/llms/googlepalm'
-import {
-  StructuredOutputParser,
-  OutputFixingParser,
-} from 'langchain/output_parsers'
+import { StructuredOutputParser } from 'langchain/output_parsers'
 import { z } from 'zod'
 
 const parser = StructuredOutputParser.fromZodSchema(
@@ -50,11 +47,10 @@ export const analyze = async (content) => {
 
   const result = await model.call(input)
   // console.log(result)
+  console.log(await parser.parse(result))
   try {
     return await parser.parse(result)
   } catch (e) {
     console.log(e)
   }
-
-  // console.log(await parser.parse(result));
 }

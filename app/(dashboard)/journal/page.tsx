@@ -1,9 +1,8 @@
-import { getUserByClerkID } from '@/app/utils/auth'
-import { prisma } from '@/app/utils/db'
+import { getUserByClerkID } from '@/utils/auth'
+import { prisma } from '@/utils/db'
 import NewEntryCard from '@/components/NewEntryCard'
 import EntryCard from '@/components/EntryCard'
 import Link from 'next/link'
-import { analyze } from '@/app/utils/ai'
 
 const getEntries = async () => {
   const user = await getUserByClerkID()
