@@ -2,6 +2,10 @@ import { PromptTemplate } from 'langchain/prompts'
 import { GooglePaLM } from 'langchain/llms/googlepalm'
 import { StructuredOutputParser } from 'langchain/output_parsers'
 import { z } from 'zod'
+import { Document } from 'langchain/document'
+import { loadQARefineChain } from 'langchain/chains'
+import { GooglePaLMEmbeddings } from 'langchain/embeddings/googlepalm'
+import { MemoryVectorStore } from 'langchain/vectorstores/memory'
 
 const parser = StructuredOutputParser.fromZodSchema(
   z.object({
@@ -43,6 +47,7 @@ export const analyze = async (content) => {
   const input = await getPrompt(content)
   const model = new GooglePaLM({
     temperature: 1,
+    modelName: 'models/text-unicorn-001',
   })
 
   const result = await model.call(input)
@@ -53,4 +58,29 @@ export const analyze = async (content) => {
   } catch (e) {
     console.log(e)
   }
+}
+
+const qa = async (question, entries) => {
+  const docs = entries.map((entry) => {
+    return new Document({
+      pageContent: entry.content,
+      metadata: { id: entry.id, createdAt: entry.createdAt },
+    })
+  })
+
+  const model = new GooglePaLM({
+    temperature: 1,
+    modelName: 'models/text-unicorn-001',
+  })
+
+  const chain = loadQARefineChain(model)
+  const embeddings = new GooglePaLMEmbeddings()
+  const store = await MemoryVectorStore.fromDocuments(docs, embeddings)
+  const relevantDocs = await store.similaritySearch(question)
+  const res = await chain.call({
+    input_documents: relevantDocs,
+    question,
+  })
+
+  return res.output_text
 }
