@@ -22,16 +22,16 @@ export const PATCH = async (request: Request, { params }) => {
 
   const updated = await prisma.analysis.upsert({
     where: {
-      entryId: updatedEntry.id
-    },
-    create:{
       entryId: updatedEntry.id,
-      ...analysis
     },
-    update: analysis
+    create: {
+      entryId: updatedEntry.id,
+      ...analysis,
+    },
+    update: analysis,
   })
 
  
 
-  return NextResponse.json({ data:{ ...updatedEntry, analysis: updated} })
+  return NextResponse.json({ data: { ...updatedEntry, analysis: updated } })
 }

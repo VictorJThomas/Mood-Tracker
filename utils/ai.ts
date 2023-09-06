@@ -47,7 +47,6 @@ export const analyze = async (content) => {
   const input = await getPrompt(content)
   const model = new GooglePaLM({
     temperature: 1,
-    modelName: 'models/text-unicorn-001',
   })
 
   const result = await model.call(input)
@@ -60,7 +59,7 @@ export const analyze = async (content) => {
   }
 }
 
-const qa = async (question, entries) => {
+export const qa = async (question, entries) => {
   const docs = entries.map((entry) => {
     return new Document({
       pageContent: entry.content,
@@ -70,7 +69,6 @@ const qa = async (question, entries) => {
 
   const model = new GooglePaLM({
     temperature: 1,
-    modelName: 'models/text-unicorn-001',
   })
 
   const chain = loadQARefineChain(model)
