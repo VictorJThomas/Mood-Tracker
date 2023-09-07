@@ -8,18 +8,20 @@ const links = [
 ]
 const DashboardLayout = ({ children }) => {
   return (
-    <div className="w-screen h-screen relative">
-      <aside className="absolute left-0 top-0 h-full w-[200px] border-r border-black/10">
-        <div>MOOD</div>
-        <ul>
+    <div className="w-full h-full relative">
+      <aside className="absolute left-0 top-0 h-auto w-[200px] border-r border-black/10">
+        <div className='px-4 my-4'>
+          <span className='text-3xl'>MOOD</span>
+        </div>
+        <ul className='px-4'>
           {links.map((link) => (
-            <li key={link.href} className="px-2 py-6 text-xl">
+            <li key={link.href} className="my-4 text-xl">
               <Link href={link.href}>{link.label}</Link>
             </li>
           ))}
         </ul>
       </aside>
-      <div className="ml-[200px] h-full w-[calc(100vw-200px)]">
+      <div className="ml-[200px] h-auto ">
         <header className="h-[60px] border-b border-black/10">
           <nav className="px-4 h-full">
             <div className="flex items-center justify-end h-full">

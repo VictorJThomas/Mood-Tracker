@@ -39,7 +39,7 @@ const HistoryChart = ({ data }) => {
           strokeWidth={3}
           activeDot={{ r: 8 }}
         />
-        <XAxis dataKey="createdAt" />
+        {/* <XAxis dataKey="createdAt" /> */}
         <Tooltip content={<CustomToolTip />} />
       </LineChart>
     </ResponsiveContainer>

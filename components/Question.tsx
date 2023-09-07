@@ -29,19 +29,19 @@ const Question = () => {
           onChange={onChange}
           value={value}
           type="text"
-          placeholder="Ask a question"
-          className="border border-black/20 px-4 py-2 text-lg rounded-lg"
+          placeholder="Ask a question..."
+          className="border border-black/20 px-2 py-2 text-lg rounded-lg"
         />
         <button
           disabled={loading}
           type="submit"
-          className="bg-blue-400 px-4 py-2 rounded-lg text-lg"
+          className="bg-blue-400 px-4 py-2 ml-2 rounded-lg text-lg"
         >
           Ask
         </button>
       </form>
       {loading && <div>...loading</div>}
-      {response && <div>{response}</div>}
+      {response && <p className='my-4 text-xl'>{response}</p>}
     </div>
   )
 }
