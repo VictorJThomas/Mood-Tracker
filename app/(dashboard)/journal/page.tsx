@@ -31,8 +31,10 @@ const JournalPage = async () => {
       <div className="my-8">
         <Question />
       </div>
-      <div className="grid grid-cols-3 gap-4 ">
+      <div className='w-[100px] h-[100px] mb-2'>
         <NewEntryCard />
+      </div>
+      <div className="grid grid-cols-3 gap-4 mb-2 pb-8">
         {entries.map((entry) => (
           <Link href={`/journal/${entry.id}`} key={entry.id}>
             <EntryCard entry={entry} />

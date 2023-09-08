@@ -2,6 +2,7 @@
 
 import { askQuestion } from '@/utils/api'
 import { useState } from 'react'
+import Spinner from './Spinner'
 
 const Question = () => {
   const [value, setValue] = useState('')
@@ -23,7 +24,7 @@ const Question = () => {
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className='mb-2'>
         <input
           disabled={loading}
           onChange={onChange}
@@ -40,7 +41,7 @@ const Question = () => {
           Ask
         </button>
       </form>
-      {loading && <div>...loading</div>}
+      {loading && <Spinner/>}
       {response && <p className='my-4 text-xl'>{response}</p>}
     </div>
   )

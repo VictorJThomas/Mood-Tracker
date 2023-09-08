@@ -22,7 +22,7 @@ const getEntry = async (id: any) => {
 const EntryPage = async ({ params }) => {
   const entry = await getEntry(params.id)
   return (
-    <div className="w-full">
+    <div className="w-full bg-zinc-400/10">
         <Editor entry={entry} />      
     </div>
   )

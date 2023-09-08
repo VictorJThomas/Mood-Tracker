@@ -15,16 +15,24 @@ const getData = async () => {
 
   const sum = analyses.reduce((all, current) => all + current.sentimentScore, 0)
   const avg = Math.round(sum / analyses.length)
-  return { analyses, avg }
+  let mood = ''
+  if(avg >= 6) {
+    mood = 'Happy' 
+  } else if (avg < 6 && avg > 0 ){
+    mood = 'Neutral'
+  } else{
+    mood = "Sad"
+  }
+  return { analyses, mood }
 }
 
 const History = async () => {
-  const { avg, analyses } = await getData()
+  const { mood, analyses } = await getData()
 
   return (
-    <div className='h-full px-6 py-8'>
-      <h1 className='text-2xl mb-4'>{`Avg. Sentiment: ${avg}`}</h1>
-      <div className='w-full h-full'>
+    <div className='h-full px-6 py-8 bg-zinc-400/10'>
+      <h1 className='text-2xl mb-4'>{`Avg. Mood: ${mood}`}</h1>
+      <div className='w-full h-full '>
         <HistoryChart data={analyses} />
       </div>
     </div>

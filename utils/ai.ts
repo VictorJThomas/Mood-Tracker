@@ -84,6 +84,6 @@ export const qa = async (question, entries) => {
     input_documents: relevantDocs,
     question,
   })
-
+  console.log(res.output_text);
   return res.output_text
 }

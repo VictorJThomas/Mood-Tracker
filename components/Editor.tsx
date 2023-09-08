@@ -29,7 +29,7 @@ const Editor = ({ entry }) => {
     },
   })
   return (
-    <div className="w-full h-full grid grid-cols-3 gap-0 relative">
+    <div className="w-full h-full grid grid-cols-3 gap-0 relative ">
       <div className="absolute left-0 top-0 p-2">
         {isLoading ? (
           <Spinner />
@@ -41,10 +41,10 @@ const Editor = ({ entry }) => {
         <textarea
           value={value}
           onChange={(e) => setValue(e.target.value)}
-          className="w-full h-full text-xl p-8"
+          className="w-full h-full text-xl p-8 d"
         />
       </div>
-      <div className="border-l border-black/5">
+      <div className="border-l rounded-3xl border-black/5">
         <div
           style={{ background: analysis.color }}
           className="h-[100px] text-white p-8"
