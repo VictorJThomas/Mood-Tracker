@@ -1,34 +1,68 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Mood Tracker App
 
-## Getting Started
 
-First, run the development server:
+## Description
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+The Mood Tracker App is a web application built with Next.js, TypeScript, Prisma, MongoDB, Tailwind CSS, and Langchain's Google PaLM LLM. It also incorporates Clerk as a sign-in/sign-up manager. This app is designed to help users monitor and manage their moods over time by providing various features for journaling, sentiment analysis, and mood tracking.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Features
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Journaling
+- Create and save journal entries.
+- The AI reads your entries, saves them, and displays a summary.
+- Analyzes the mood, subject, color, and sentiment score of each entry.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+### AI Questioning
+- Ask questions to the AI based on your journal entries.
+- Receive answers and insights from the AI.
 
-## Learn More
+### Mood History
+- Visualize your mood history with an interactive graph.
+- View the dates and moods recorded for each day.
 
-To learn more about Next.js, take a look at the following resources:
+## Installation
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+To run this app locally, follow these steps:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+1. Clone the repository: `git clone https://github.com/VictorJThomas/Mood-Tracker`
+2. Navigate to the project directory: `cd mood`
+3. Install dependencies: `npm install` or `yarn install`
 
-## Deploy on Vercel
+## Configuration
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Before running the app, you'll need to set up the following environment variables:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+### In a `.env` file you will need:
+
+- `DATABASE_URL`: MongoDB database connection URI.
+
+### In a `.env.local` file you will need:
+- `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY`: For public Clerk use
+- `CLERK_SECRET_KEY`: Clerk frontend API key.
+
+For Clerk browsing:
+- `NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in`
+- `NEXT_PUBLIC_CLERK_SIGN_UP_URL=/sign-up`
+- `NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL=/journal`
+- `NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL=/new-user`
+
+- `GOOGLE_PALM_API_KEY`: For Google PaLM LLM API key.
+
+
+## Usage
+
+1. Start the development server: `npm run dev` or `yarn dev`.
+2. Access the app in your web browser at `http://localhost:3000`.
+
+
+## Acknowledgments
+
+- This app was created with the support of [Clerk](https://clerk.dev/).
+- Special thanks to Langchain for their Google PaLM LLM integration.
+
+## Contributing
+
+Contributions are welcome! 
+## Contact
+
+For questions or feedback, please contact [Victor J. Thomas](mailto:victorjthomas10@gmail.com).
