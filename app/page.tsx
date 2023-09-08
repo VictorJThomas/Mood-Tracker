@@ -11,8 +11,7 @@ export default async function Home() {
       <div className="w-full max-w-[600px] mx-auto">
         <h1 className="text-6xl mb-4">The best journal app & mood tracker</h1>
         <p className="text-2xl text-white/60 mb-4">
-          This app is the ultimate tool for monitoring your mood over your
-          lifetime. Simply ensure your honesty for optimal results.
+          This application serves as the ultimate tool for tracking your mood throughout your entire life. To achieve the best results, please maintain honesty in your input.
         </p>
         <div>
           <Link href={href}>
