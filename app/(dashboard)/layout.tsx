@@ -1,5 +1,4 @@
 import { UserButton } from '@clerk/nextjs'
-import { Disclosure } from '@headlessui/react'
 import Link from 'next/link'
 
 const links = [
@@ -7,7 +6,7 @@ const links = [
   { href: '/journal', label: 'Journal' },
   { href: '/history', label: 'History' },
 ]
-const DashboardLayout = ({ children }: any) => {
+const DashboardLayout = ({ children }) => {
   return (
     <div className='w-full h-full relative'>
       <div className='ml-[0px] h-auto'>
