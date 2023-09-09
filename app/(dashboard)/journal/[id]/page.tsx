@@ -19,7 +19,7 @@ const getEntry = async (id: any) => {
   return entry
 }
 
-const EntryPage = async ({ params }) => {
+const EntryPage = async ({ params }: any) => {
   const entry = await getEntry(params.id)
   return (
     <div className="w-full bg-zinc-400/10">
