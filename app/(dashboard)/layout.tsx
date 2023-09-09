@@ -6,7 +6,7 @@ const links = [
   { href: '/journal', label: 'Journal' },
   { href: '/history', label: 'History' },
 ]
-const DashboardLayout = ({ children }) => {
+const DashboardLayout = ({ children }: any) => {
   return (
     <div className='w-full h-full relative'>
       <div className='ml-[0px] h-auto'>
