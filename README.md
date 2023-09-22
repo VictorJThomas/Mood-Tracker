@@ -3,7 +3,17 @@
 
 ## Description
 
-The Mood Tracker App is a web application built with Next.js, TypeScript, Prisma, MongoDB, Tailwind CSS, and Langchain's Google PaLM LLM. It also incorporates Clerk as a sign-in/sign-up manager. This app is designed to help users monitor and manage their moods over time by providing various features for journaling, sentiment analysis, and mood tracking.
+The Mood Tracker App is a web application built with Next.js, TypeScript, Prisma, MongoDB, Tailwind CSS, and Langchain's Google PaLM 2 LLM. It also incorporates Clerk as a sign-in/sign-up manager. This app is designed to help users monitor and manage their moods over time by providing various features for journaling, sentiment analysis, and mood tracking.
+
+## Live Demo
+https://mood-tracker-7o25.vercel.app/
+
+## Test Account
+
+This is an account made for testing. Feel free to use it:
+
+`test@example.com
+test1234`
 
 ## Features
 
@@ -19,6 +29,7 @@ The Mood Tracker App is a web application built with Next.js, TypeScript, Prisma
 ### Mood History
 - Visualize your mood history with an interactive graph.
 - View the dates and moods recorded for each day.
+
 
 ## Installation
 
