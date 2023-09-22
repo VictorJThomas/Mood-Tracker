@@ -5,31 +5,32 @@ import { useState } from 'react'
 import { useAutosave } from 'react-autosave'
 import Spinner from './Spinner'
 
-type Entry = {
-  entry: {
-    id: string;
-    content: string;
-    analysis: {
-        id: string;
-        createdAt: Date;
-        updatedAt: Date;
-        entryId: string;
-        userId: string;
-        mood: string;
-        summary: string;
-        color: string;
-        negative: boolean;
-        subject: string;
-        sentimentScore: number;
-    } 
+interface EntryProps {
+  id: string
+  content: string
+  analysis: {
+    id: string
+    createdAt: Date
+    updatedAt: Date
+    entryId: string
+    userId: string
+    mood: string
+    summary: string
+    color: string
+    negative: boolean
+    subject: string
+    sentimentScore: number
   }
+}
+
+type Entry = {
+  entry: EntryProps
 }
 
 const Editor = ({ entry }: Entry) => {
   const [value, setValue] = useState(entry.content)
   const [isLoading, setIsLoading] = useState(false)
   const [analysis, setAnalysis] = useState(entry.analysis)
-
 
   const { mood, summary, subject, negative } = analysis
   const analysisData = [
@@ -73,13 +74,13 @@ const Editor = ({ entry }: Entry) => {
         </div>
         <div>
           <ul role="list" className="divide-y divide-gray-200">
-          {analysisData.map((item) => (
+            {analysisData.map((item) => (
               <li
                 key={item.name}
                 className="px-2 py-4 flex items-ceter justify-between border-b border-t border-black/10"
               >
                 <span className="text-xl font-semibold w-1/3">{item.name}</span>
-                <span className='text-xl'>{item.value}</span>
+                <span className="text-xl">{item.value}</span>
               </li>
             ))}
           </ul>
