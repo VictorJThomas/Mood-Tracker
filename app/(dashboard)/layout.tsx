@@ -1,12 +1,16 @@
 import { UserButton } from '@clerk/nextjs'
 import Link from 'next/link'
 
+type PageProp = {
+  children: JSX.Element;
+}
+
 const links = [
   { href: '/', label: 'Home' },
   { href: '/journal', label: 'Journal' },
   { href: '/history', label: 'History' },
 ]
-const DashboardLayout = ({ children }: any) => {
+const DashboardLayout: React.FC<PageProp> = ({ children }) => {
   return (
     <div className='w-full h-full relative'>
       <div className='ml-[0px] h-auto'>

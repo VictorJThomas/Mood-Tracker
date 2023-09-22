@@ -5,13 +5,33 @@ import { useState } from 'react'
 import { useAutosave } from 'react-autosave'
 import Spinner from './Spinner'
 
-const Editor = ({ entry }) => {
+type Entry = {
+  entry: {
+    id: string;
+    content: string;
+    analysis: {
+        id: string;
+        createdAt: Date;
+        updatedAt: Date;
+        entryId: string;
+        userId: string;
+        mood: string;
+        summary: string;
+        color: string;
+        negative: boolean;
+        subject: string;
+        sentimentScore: number;
+    } 
+  }
+}
+
+const Editor = ({ entry }: Entry) => {
   const [value, setValue] = useState(entry.content)
   const [isLoading, setIsLoading] = useState(false)
   const [analysis, setAnalysis] = useState(entry.analysis)
 
 
-  const { mood, summary, color, subject, negative } = analysis
+  const { mood, summary, subject, negative } = analysis
   const analysisData = [
     { name: 'Summary', value: summary },
     { name: 'Subject', value: subject },
