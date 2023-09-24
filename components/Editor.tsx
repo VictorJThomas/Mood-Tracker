@@ -5,29 +5,25 @@ import { useState } from 'react'
 import { useAutosave } from 'react-autosave'
 import Spinner from './Spinner'
 
-interface EntryProps {
-  id: string
-  content: string
-  analysis: {
-    id: string
-    createdAt: Date
-    updatedAt: Date
-    entryId: string
-    userId: string
-    mood: string
-    summary: string
-    color: string
-    negative: boolean
-    subject: string
-    sentimentScore: number
-  }
+interface Analysis {
+  mood: string;
+  color: string;
+  summary: string;
+  subject: string;
+  negative: boolean;
 }
 
-type Entry = {
-  entry: EntryProps
+interface Entry {
+  id: string;
+  content: string;
+  analysis: Analysis;
 }
 
-const Editor = ({ entry }: Entry) => {
+interface EditorProps {
+  entry: Entry;
+}
+
+const Editor: React.FC<EditorProps> = ({ entry } ) => {
   const [value, setValue] = useState(entry.content)
   const [isLoading, setIsLoading] = useState(false)
   const [analysis, setAnalysis] = useState(entry.analysis)
